@@ -1,0 +1,244 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Sure Connects Api
+  description: 'This document provides detailed documentation for the API endpoint responsible for sending messages through the messaging service.This API allows users to send messages to one or more destinations with customizable options.'
+  termsOfService: https://mohamedfahmy.docs.apiary.io/#reference
+  contact:
+    name: Sure Connects
+    url: sureconnects.com
+    email: sure@sure.com.sa
+  license:
+    name: SureConnects License
+    url: http://license.foo.com
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/MOHMEDFAHMYALI_1/SureConnects/1.0.0
+paths: 
+    /SendOTPMessage:
+      post:
+        summary: Send message to a destination
+        tags:
+          - Message
+        parameters: 
+          - in: header
+            name: email
+            description: user email registered in the system
+            schema:
+              type: string
+            
+          - in: header  
+            name: accountToken
+            description: Account Access Token Registered On System
+            schema:
+              type: string
+              
+        description: send otp message
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sender:
+                    type: string
+                    example: test
+                    
+                  message:
+                    type: string
+                    example: Hello test From Api
+                    
+                  messageInfos:
+                    type: object
+                    properties:
+                      distination:
+                        type: string
+                        example: 53*******
+        responses:
+          200:
+            description: Successful sending
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items: {}
+                    
+                    success:
+                      type: boolean
+                      example: true
+                    
+                    value:
+                      type: object
+                      properties:
+                        messageId: 
+                          type: string
+                          example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                        
+                        status:
+                          type: string
+                          example: 1000
+          400:
+            description: bad request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items:
+                        properties:
+                          name: 
+                            type: string
+                            example: Error Description
+                          value:
+                            type: string
+                            example: Error code
+                    
+                    success:
+                      type: boolean
+                      example: false
+                    
+                    value:
+                      type: object
+                      example: null
+          401:
+            description: Invalid User Permissions 
+    /SendMessage:
+       post:
+        summary: Send message to multiple destinations 
+        tags:
+          - Message
+        parameters: 
+          - in: header
+            name: email
+            description: user email registered in the system
+            schema:
+              type: string
+            
+          - in: header  
+            name: accountToken
+            description: Account Access Token Registered On System
+            schema:
+              type: string
+              
+        description: send otp message
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sender:
+                    type: string
+                    example: test
+                    
+                  message:
+                    type: string
+                    example: Hello test From Api
+                    
+                  messageInfos:
+                    type: array
+                    items:
+                      properties:
+                        distination:
+                          type: string
+                          example: 53*******
+                          
+                        customMessage:
+                          type: string
+                          example: If you want to send a custom message for a specific distination
+                  filterRepeatedNumbers:
+                    type: boolean
+                    example: false
+                    
+                  requestDeliveryReport:
+                    type: boolean
+                    example: false
+        responses:
+          200:
+            description: Successful sending
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items: {}
+                    
+                    success:
+                      type: boolean
+                      example: true
+                    
+                    value:
+                      type: object
+                      properties:
+                        messageId: 
+                          type: string
+                          example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                        
+                        status:
+                          type: string
+                          example: 1000
+          400:
+            description: bad request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items:
+                        properties:
+                          name: 
+                            type: string
+                            example: Error Description
+                          value:
+                            type: string
+                            example: Error code
+                    
+                    success:
+                      type: boolean
+                      example: false
+                    
+                    value:
+                      type: object
+                      example: null
+          401:
+            description: Invalid User Permissions
