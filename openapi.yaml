@@ -248,11 +248,6 @@ paths:
         tags:
           - WhatsApp
         parameters: 
-          - in: header  
-            name: accountToken
-            description: Account Access Token Registered On System
-            schema:
-              type: string
               
         description: Send WhatsApp template message 
         requestBody:
@@ -371,16 +366,6 @@ paths:
         tags:
           - WhatsApp
         parameters:
-          - in: header  
-            name: phoneNumber
-            description: phoneNumber registered on whats app business
-            schema:
-              type: string
-          - in: header  
-            name: accountToken
-            description: Account Access Token Registered On System
-            schema:
-              type: string
               
         description: Add WhatsApp template 
         requestBody:
