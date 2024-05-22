@@ -242,3 +242,249 @@ paths:
                       example: null
           401:
             description: Invalid User Permissions
+    /SendWhatsAppTemplateMessage:
+       post:
+        summary: Send WhatsApp template message 
+        tags:
+          - WhatsApp
+        parameters: 
+          - in: header  
+            name: accountToken
+            description: Account Access Token Registered On System
+            schema:
+              type: string
+              
+        description: Send WhatsApp template message 
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                 properties:
+                  from:
+                    type: string
+                    example: +966******
+                    
+                  to:
+                    type: string
+                    example: +966******
+                    
+                  messageId:
+                    type: guid
+                    example: b5e551dd-2874-496f-8e09-a1d5471c3f77 
+                    
+                  content:
+                    type: object
+                    properties:
+                        templateName:
+                          type: string
+                          example: template_name
+                          
+                        templateData:
+                          type: object
+                          properties:
+                            body:
+                              type: object
+                              properties:
+                                placeholders:
+                                   type : array
+                                   items:
+                                      properties:
+                        language:
+                          type: string
+                          example: en_GB
+                  notifyUrl:
+                   type: string
+                   example: https://www.example.com/whatsapp
+        responses:
+          200:
+            description: Successful sending
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items: {}
+                    
+                    success:
+                      type: boolean
+                      example: true
+                    
+                    value:
+                      type: object
+                      properties:
+                        messageId: 
+                          type: string
+                          example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                        
+                        status:
+                          type: string
+                          example: 1000
+          400:
+            description: bad request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items:
+                        properties:
+                          name: 
+                            type: string
+                            example: Error Description
+                          value:
+                            type: string
+                            example: Error code
+                    
+                    success:
+                      type: boolean
+                      example: false
+                    
+                    value:
+                      type: object
+                      example: null
+          401:
+            description: Invalid User Permissions
+    /AddWhatsAppTemplate:
+       post:
+        summary: Add WhatsApp template 
+        tags:
+          - WhatsApp
+        parameters:
+          - in: header  
+            name: phoneNumber
+            description: phoneNumber registered on whats app business
+            schema:
+              type: string
+          - in: header  
+            name: accountToken
+            description: Account Access Token Registered On System
+            schema:
+              type: string
+              
+        description: Add WhatsApp template 
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: template_name
+                    
+                  language:
+                    type: string
+                    example: en
+                    
+                  category:
+                    type: string
+                    example: MARKETING
+                  allowCategoryChange:
+                    type: boolean
+                    example: false
+                  structure:
+                    type: object
+                    properties:
+                        body:
+                          type: object
+                          properties:
+                            text:
+                              type: string
+                              example: body {{1}} content
+                            examples:
+                              type: array
+                              items:
+                               properties:
+                        type:
+                         type: string
+                         example: TEXT
+
+        responses:
+          200:
+            description: Successful added
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items: {}
+                    
+                    success:
+                      type: boolean
+                      example: true
+                    
+                    value:
+                      type: object
+                      properties:
+                        templateId: 
+                          type: string
+                          example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                        
+                        status:
+                          type: string
+                          example: 1
+          400:
+            description: bad request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items:
+                        properties:
+                          name: 
+                            type: string
+                            example: Error Description
+                          value:
+                            type: string
+                            example: Error code
+                    
+                    success:
+                      type: boolean
+                      example: false
+                    
+                    value:
+                      type: object
+                      example: null
+          401:
+            description: Invalid User Permissions
