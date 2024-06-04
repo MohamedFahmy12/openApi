@@ -29,8 +29,8 @@ paths:
               type: string
             
           - in: header  
-            name: accountToken
-            description: Account Access Token Registered On System
+            name: apiKey
+            description: API key Registered On System
             schema:
               type: string
               
@@ -136,8 +136,8 @@ paths:
               type: string
             
           - in: header  
-            name: accountToken
-            description: Account Access Token Registered On System
+            name: apiKey
+            description: API key Registered On System
             schema:
               type: string
               
