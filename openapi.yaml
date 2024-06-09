@@ -242,6 +242,111 @@ paths:
                       example: null
           401:
             description: Invalid User Permissions
+    /SendMessageQuery:
+       post:
+        summary: Send message to a destination
+        tags:
+          - Message
+        parameters: 
+          - in: header
+            name: email
+            description: user email registered in the system
+            schema:
+              type: string
+            
+          - in: header  
+            name: apiKey
+            description: API key Registered On System
+            schema:
+              type: string
+              
+          - in: query
+            required: true
+            name: sender
+            description: Sender name
+            schema:
+              type: string
+          - in: query
+            required: true
+            name: message
+            description: the message you would like to send
+            schema:
+              type: string
+          - in: query
+            required: true
+            name: distination
+            description: the number you would like to send the message to with country code prefix
+            schema:
+              type: string
+              example: 96653*******
+        description: send otp message
+        responses:
+          200:
+            description: Successful sending
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items: {}
+                    
+                    success:
+                      type: boolean
+                      example: true
+                    
+                    value:
+                      type: object
+                      properties:
+                        messageId: 
+                          type: string
+                          example: eb3e439e-30d8-42e0-b802-2b9db484775e
+                        
+                        status:
+                          type: string
+                          example: 1000
+          400:
+            description: bad request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    confirm:
+                      type: boolean
+                      example: false
+                    
+                    message:
+                      type: string
+                      
+                    modelStateErrors:
+                      type: array
+                      items:
+                        properties:
+                          name: 
+                            type: string
+                            example: Error Description
+                          value:
+                            type: string
+                            example: Error code
+                    
+                    success:
+                      type: boolean
+                      example: false
+                    
+                    value:
+                      type: object
+                      example: null
+          401:
+            description: Invalid User Permissions
     /SendWhatsAppTemplateMessage:
        post:
         summary: Send WhatsApp template message 
